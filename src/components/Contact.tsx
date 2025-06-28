@@ -77,27 +77,27 @@
 
 
 
-import React, { useRef } from "react";
+import  { useRef } from "react";
 import emailjs from "@emailjs/browser";
 
 function Contact() {
-  const form = useRef();
+  const form = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e) => {
+  const sendEmail = (e:any) => {
     e.preventDefault();
 
     emailjs
       .sendForm(
         "service_ilskzlp",    // 🔁 Replace with your EmailJS service ID
         "template_jn4mkmo",   // 🔁 Replace with your EmailJS template ID
-        form.current,
+        form.current!,
         "G3DrzyjUPAhm6uy2A"     // 🔁 Replace with your EmailJS public key
       )
       .then(
         (result) => {
           console.log("SUCCESS!", result.text);
           alert("Message sent successfully!");
-          form.current.reset(); // reset form after success
+          form.current?.reset(); // reset form after success
         },
         (error) => {
           console.log("FAILED...", error.text);
